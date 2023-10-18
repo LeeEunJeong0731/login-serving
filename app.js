@@ -1,1 +1,26 @@
-console.log("안녕하세요");
+const http = require("http");
+const fs = require("fs");
+const url = require("url");
+
+function serverErrorLog() {
+  res.writeHead(500);
+  return res.end("서버에 문제가 생겻습니다.");
+}
+
+const server = http.createServer((req, res) => {
+  if (req.url === "/" && req.method === "GET") {
+    fs.readFile("./static/index.html", (err, data) => {
+      if (err) {
+        serverErrorLog();
+      }
+      res.writeHead(200, { "Content-type": "text/html" });
+      res.end(data);
+    });
+  }
+});
+const PORT = 8080;
+server.listen(PORT, () => {
+  console.log(
+    `cli 창에서 컨트롤 누른후  옆에 포트 누르면 편리하게 확인 -> http://localhost:${PORT}/`
+  );
+});
