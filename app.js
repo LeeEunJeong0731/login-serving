@@ -35,6 +35,14 @@ const server = http.createServer((req, res) => {
       res.writeHead(200, { "Content-Type": "text/html" });
       res.end(data);
     });
+  } else if (req.url === "js/index.js" && req.method === "POST") {
+    fs.readFile("./static/js/index.js", "utf8", (err, data) => {
+      if (err) {
+        serverErrorLog();
+      }
+      res.writeHead(200, { "Content-Type": "application/javascript" });
+      res.end(data);
+    });
   }
 });
 const PORT = 8080;
