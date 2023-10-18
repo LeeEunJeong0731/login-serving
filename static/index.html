@@ -8,10 +8,23 @@
   </head>
   <body>
     <div id="root">
-      <form action="/login" method="post">
-        <input type="text" name="username" placeholder="username" />
-        <input type="password" name="password" placeholder="password" />
-        <input type="password" name="password" placeholder="password" />
+      <form action="/static/secindex.html" method="post">
+        <div>
+          <label>ID</label>
+          <input type="text" name="username" />
+        </div>
+        <div>
+          <label>PW</label>
+          <input type="password" name="password" />
+        </div>
+        <div>
+          <label>PW</label>
+          <input type="password" name="password" />
+        </div>
+        <div>
+          <label>Email</label>
+          <input type="email" name="email" />
+        </div>
         <input type="submit" value="Sing in" />
       </form>
     </div>
