@@ -1,6 +1,8 @@
 const http = require("http");
 const fs = require("fs");
 const url = require("url");
+const querystring = require("querystring");
+
 function serverErrorLog() {
   res.writeHead(500);
   return res.end("서버에 문제가 생겻습니다.");
@@ -41,8 +43,8 @@ const server = http.createServer((req, res) => {
         const { uesrname, password } = parsedBody;
 
         console.log(`form으로 부터 받은 데이터 확인 ->`, parsedBody);
-        console.log((`form으로 부터 받은 데이터 확인 ->`, uesrname));
-        console.log((`form으로 부터 받은 데이터 확인 ->`, password));
+        console.log(`form으로 부터 받은 데이터 확인 ->`, uesrname);
+        console.log(`form으로 부터 받은 데이터 확인 ->`, password);
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(data);
       });
