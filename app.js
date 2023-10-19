@@ -32,17 +32,30 @@ const server = http.createServer((req, res) => {
       if (err) {
         serverErrorLog();
       }
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(data);
+      let body = "";
+      req.on("data", (chunk) => {
+        body += chunk.toString();
+      });
+      req.on("end", () => {
+        const parsedBody = querystring.parse(body);
+        const { uesrname, password } = parsedBody;
+
+        console.log(`form으로 부터 받은 데이터 확인 ->`, parsedBody);
+        console.log((`form으로 부터 받은 데이터 확인 ->`, uesrname));
+        console.log((`form으로 부터 받은 데이터 확인 ->`, password));
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.end(data);
+      });
     });
-  } else if (req.url === "js/index.js" && req.method === "POST") {
-    fs.readFile("./static/js/index.js", "utf8", (err, data) => {
-      if (err) {
-        serverErrorLog();
-      }
-      res.writeHead(200, { "Content-Type": "application/javascript" });
-      res.end(data);
-    });
+    // } else if (req.url === "/static/js/index.js" && req.method === "POST") {
+    //   fs.readFile("./static/js/index.js", "utf8", (err, data) => {
+    //     if (err) {
+    //       serverErrorLog();
+    //     }
+    //     res.writeHead(200, { "Content-Type": "application/javascript" });
+    //     res.end(data);
+    //   });
+    // }
   }
 });
 const PORT = 8080;
