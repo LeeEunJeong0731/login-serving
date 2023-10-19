@@ -1,12 +1,16 @@
-const root = document.getElementById("root");
-const submit = document.getElementById("submit");
-const form = document.getElementById("form");
+function idAlpha(str) {
+  var code;
+  for (var i = 0; i < str.length; i++) {
+    code = str.charCodeAt(i);
+    if (
+      !(code > 64 && code < 91) && // upper alpha( A - Z )
+      !(code > 96 && code < 123)
+    ) {
+      // lower alpha ( a - z )
+      return false;
+    }
+  }
+  return true;
+}
 
-const userId = root.children[0].children[0];
-const password = root.children[0].children[1];
-const password2 = root.children[0].children[2];
-const email = root.children[0].children[3];
-
-const idRegExp = /^[a-zA-z]$/;
-//로그인 유효성 검사 소,대문자 또한 0-9까지 사용 할 수있다.
-console.log("hi");
+// (code > 47 && code < 58) && // numeric (0-9)
