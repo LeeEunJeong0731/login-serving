@@ -10,32 +10,49 @@
     <div id="root">
       <form name="joinForm" action="/static/secindex.html" method="post">
         <div>
-          <label>ID <input type="text" name="username" /></label>
+          <label>ID <input type="text" name="username" id="userId" /></label>
         </div>
         <div>
-          <label>PW <input type="password" name="password" /></label>
+          <label
+            >PW <input type="password" name="password" id="password"
+          /></label>
         </div>
         <div>
-          <label>PW <input type="password" name="password" /></label>
+          <label
+            >PW <input type="password" name="password" id="repassword"
+          /></label>
         </div>
         <div>
-          <label>Email <input type="email" name="email" /></label>
+          <label>Email <input type="email" name="email" id="email" /></label>
         </div>
-        <input type="submit" value="Sing in" id="submit" />
+        <input
+          type="submit"
+          value="Sing in"
+          id="submit"
+          onclick="submit_check();"
+        />
       </form>
     </div>
     <script>
-      const root = document.getElementById("root");
-      const submit = document.getElementById("submit");
-      const form = document.getElementById("form");
+      function submit_check() {
+        const root = document.getElementById("root");
+        const submit = document.getElementById("submit");
+        const form = document.getElementById("form");
 
-      const userId = root.children[0].children[0].children[0].children[0];
-      const password = root.children[0].children[1];
-      const password2 = root.children[0].children[2];
-      const email = root.children[0].children[3];
+        const userId = document.getElementById("userId");
+        const password = document.getElementById("password");
+        const repassword = document.getElementById("repassword");
+        const email = root.children[0].children[3];
 
-      const idRegExp = /^[a-zA-z]$/;
-      //로그인 유효성 검사 소,대문자 또한 0-9까지 사용 할 수있다.
+        const idRegExp = /^[a-zA-z]$/;
+        //로그인 유효성 검사 소,대문자 또한 0-9까지 사용 할 수있다.
+        if (userId.value === "") {
+          alert("id를 입력해주세요.");
+          return false;
+          // userId 의 값이 비워져있을 경우 팝업창을 띄우고 아래 함수들을 모두 false로 번환 해라.
+          userId.focus();
+        }
+      }
     </script>
   </body>
 </html>
