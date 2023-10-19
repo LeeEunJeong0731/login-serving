@@ -42,27 +42,40 @@
         const userId = document.getElementById("userId");
         const password = document.getElementById("password");
         const repassword = document.getElementById("repassword");
-        const email = root.children[0].children[3];
+        const email = document.getElementById("email");
 
-        const idRegExp = /^[a-zA-Z0-9]$/;
+        const idRegExp = /[a-zA-Z]/;
+        const pwRegExp = /[a-zA-Z0-9]/;
         //로그인 유효성 검사 소,대문자를 사용 할 수있다.
+        function errorAlertMessage(message, focus) {
+          alert(message);
+          focus.focus();
+        }
         if (userId.value === "") {
-          alert("id를 입력해주세요.");
-          userId.focus();
+          errorAlertMessage("id를 입력해주세요.", userId);
+
           return false;
           // userId 의 값이 비워져있을 경우 팝업창을 띄우고 아래 함수들을 모두 false로 번환 해라.
-        } else if (idRegExp.test(userId.value)) {
-          alert("id는 영어 대문자 소문자를 써주세요.");
-          userId.focus();
+        } else if (!idRegExp.test(userId.value)) {
+          errorAlertMessage(
+            "id는 영어 대문자 소문자를 포함해서 작성해주세요.",
+            userId
+          );
           return false;
         }
         if (password.value === "") {
-          alert("password 를 입력 해주세요");
-          password.focus();
+          errorAlertMessage("password를 입력해주세요", password);
           return false;
-        } else if (idRegExp.test(password.value)) {
-          alert("password는 대문자,소문자,숫자 포함 작성해주세요.");
-          password.focus();
+        } else if (!pwRegExp.test(password.value)) {
+          errorAlertMessage(
+            "password는 대소문자,숫자를 포함해서 작성해주세요.",
+            password
+          );
+          return false;
+        }
+        if (password.value !== repassword.value) {
+          errorAlertMessage("비밀번호가 일치 하지 않습니다.", repassword);
+
           return false;
         }
       }
