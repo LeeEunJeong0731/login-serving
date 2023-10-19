@@ -8,25 +8,34 @@
   </head>
   <body>
     <div id="root">
-      <form action="/static/secindex.html" method="post">
+      <form name="joinForm" action="/static/secindex.html" method="post">
         <div>
-          <label>ID</label>
-          <input type="text" name="username" />
+          <label>ID <input type="text" name="username" /></label>
         </div>
         <div>
-          <label>PW</label>
-          <input type="password" name="password" />
+          <label>PW <input type="password" name="password" /></label>
         </div>
         <div>
-          <label>PW</label>
-          <input type="password" name="password" />
+          <label>PW <input type="password" name="password" /></label>
         </div>
         <div>
-          <label>Email</label>
-          <input type="email" name="email" />
+          <label>Email <input type="email" name="email" /></label>
         </div>
-        <input type="submit" value="Sing in" />
+        <input type="submit" value="Sing in" id="submit" />
       </form>
     </div>
+    <script>
+      const root = document.getElementById("root");
+      const submit = document.getElementById("submit");
+      const form = document.getElementById("form");
+
+      const userId = root.children[0].children[0].children[0].children[0];
+      const password = root.children[0].children[1];
+      const password2 = root.children[0].children[2];
+      const email = root.children[0].children[3];
+
+      const idRegExp = /^[a-zA-z]$/;
+      //로그인 유효성 검사 소,대문자 또한 0-9까지 사용 할 수있다.
+    </script>
   </body>
 </html>
