@@ -44,20 +44,20 @@
         const repassword = document.getElementById("repassword");
         const email = root.children[0].children[3];
 
-        const idRegExp = /^[a-zA-z]$/;
-        //로그인 유효성 검사 소,대문자 또한 0-9까지 사용 할 수있다.
+        const idRegExp = /^[a-zA-Z]$/;
+        //로그인 유효성 검사 소,대문자를 사용 할 수있다.
         if (userId.value === "") {
           alert("id를 입력해주세요.");
           userId.focus();
           return false;
           // userId 의 값이 비워져있을 경우 팝업창을 띄우고 아래 함수들을 모두 false로 번환 해라.
-        } else if (!idRegExp.test(userId.value)) {
+        } else if (idRegExp.test(userId.value)) {
           alert("id는 영어 대문자 소문자를 써주세요.");
           userId.focus();
           return false;
         }
         if (password.value === "") {
-          alert("비밀번호를 입력해주세요.");
+          alert("password 를 입력 해주세요");
           password.focus();
           return false;
         }
