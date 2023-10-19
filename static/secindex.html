@@ -16,16 +16,42 @@
         </div>
         <div>
           <label>Title</label>
-          <input type="text" name="title" />
+          <input type="text" name="title" id="title" />
         </div>
         <div>
           <label>Text</label>
-          <input type="text" name="Text" />
+          <input type="text" name="Text" id="text" />
         </div>
         <div>
-          <input type="submit" value="Send" />
+          <input type="button" id="button" name="send" value="send" />
+          <br />
         </div>
       </form>
     </div>
+    <script>
+      const title = document.getElementById("title");
+      const text = document.getElementById("text");
+      const btn = document.getElementById("button");
+      btn.addEventListener("mouseover", (caution) => {
+        if (title.value === "") {
+          alert("제목을 입력해주세요");
+          title.focus();
+        }
+
+        if (text.value === "") {
+          alert("내용을 입력해주세요");
+          text.focus();
+        }
+      });
+
+      // input이 빈칸 여부에 따른 버튼 활성화 함수
+      function active() {
+        if (!(title.value && text.value)) {
+          btn.disabled = true;
+        } else {
+          btn.disabled = false;
+        }
+      }
+    </script>
   </body>
 </html>
