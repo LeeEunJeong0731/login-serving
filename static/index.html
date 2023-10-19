@@ -52,32 +52,45 @@
           focus.focus();
         }
         if (userId.value === "") {
-          errorAlertMessage("id를 입력해주세요.", userId);
+          return errorAlertMessage("id를 입력해주세요.", userId);
 
-          return false;
           // userId 의 값이 비워져있을 경우 팝업창을 띄우고 아래 함수들을 모두 false로 번환 해라.
         } else if (!idRegExp.test(userId.value)) {
-          errorAlertMessage(
+          return errorAlertMessage(
             "id는 영어 대문자 소문자를 포함해서 작성해주세요.",
             userId
           );
-          return false;
         }
         if (password.value === "") {
-          errorAlertMessage("password를 입력해주세요", password);
-          return false;
+          return errorAlertMessage("password를 입력해주세요", password);
         } else if (!pwRegExp.test(password.value)) {
-          errorAlertMessage(
+          return errorAlertMessage(
             "password는 대소문자,숫자를 포함해서 작성해주세요.",
             password
           );
-          return false;
         }
         if (password.value !== repassword.value) {
-          errorAlertMessage("비밀번호가 일치 하지 않습니다.", repassword);
-
-          return false;
+          return errorAlertMessage(
+            "비밀번호가 일치 하지 않습니다.",
+            repassword
+          );
         }
+
+        function isAlphaNumeric(str) {
+          var code;
+          for (var i = 0; i < str.length; i++) {
+            code = str.charCodeAt(i);
+            if (
+              !(code > 64 && code < 91) && // upper alpha( A - Z )
+              !(code > 96 && code < 123)
+            ) {
+              // lower alpha ( a - z )
+              return false;
+            }
+          }
+          return true;
+        }
+        // (code > 47 && code < 58) && // numeric (0-9)
       }
     </script>
   </body>
