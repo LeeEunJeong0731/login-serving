@@ -23,3 +23,5 @@ function idpwCheck(id) {
     }
   }
 }
+
+module.exports = idCheck;
