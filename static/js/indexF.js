@@ -8,7 +8,7 @@ const OneHTMl = `<!DOCTYPE html>
   </head>
   <body>
     <div id="root">
-      <form name="joinForm" action="/static/secindex.html" method="post">
+      <form name="joinForm"  method="post">
         <div>
           <label>ID <input type="text" name="username" id="userId" /></label>
         </div>
@@ -45,7 +45,7 @@ const TwoHTML = `<!DOCTYPE html>
       </head>
       <body>
         <div id="root">
-          <form action="/" method="get">
+          <form  method="get">
             <div>
               <p>
                 님 반갑습니다! <br />
