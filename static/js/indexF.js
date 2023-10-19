@@ -1,34 +1,63 @@
-const sub = `<!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-      </head>
-      <body>
-        <div id="root">
-          <form  method="get">
-            <div>
-              <p>
-                님 반갑습니다! <br />
-                저에게 편지를 보내주세요
-              </p>
-            </div>
-            <div>
-              <label>Title</label>
-              <input type="text" name="title" />
-            </div>
-            <div>
-              <label>Text</label>
-              <input type="text" name="Text" />
-            </div>
-            <div>
-              <input type="submit" value="Send" />
-            </div>
-          </form>
-        </div>
-      </body>
-    </html>
-    `;
+const sub = (subpage) => {
+  return `<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+    </head>
+    <body>
+      <div id="root">
+        <form  method="get">
+          <div>
+            <p> ${subpage}님 반갑습니다! <br />
+              저에게 편지를 보내주세요
+            </p>
+          </div>
+          <div>
+            <label>Title</label>
+            <input type="text" name="title" />
+          </div>
+          <div>
+            <label>Text</label>
+            <input type="text" name="Text" />
+          </div>
+          <div>
+          <input type="button" id="btn" name="send" value="send"
+          <br>
+          </div>
+        </form>
+      </div>
+      <script>
+        const title = document.getElementById("title");
+        const text = document.getElementById("text");
+        const btn = document.getElementById("button");
+        btn.addEventListener("mouseover", (caution) => {
+          if (title.value === "") {
+            alert("제목을 입력해주세요");
+            title.focus();
+          }
+  
+          if (text.value === "") {
+            alert("내용을 입력해주세요");
+            text.focus();
+          }
+        });
+  
+        // input이 빈칸 여부에 따른 버튼 활성화 함수
+        function active() {
+          if (!(title.value && text.value)) {
+            btn.disabled = true;
+          } else {
+            btn.disabled = false;
+          }
+        }
+      </script>
+    </body>
+  </html>
+    </body>
+  </html>
+  `;
+};
 
-module.exports = indexF;
+module.exports = sub;

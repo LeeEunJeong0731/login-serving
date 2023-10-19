@@ -1,15 +1,24 @@
 const http = require("http");
 const fs = require("fs");
 const url = require("url");
-const querystring = require("querystring");
+const querystring = require("querystring"); //쿼리스트링 모듈 가져오기
+
+// const idAlpha = require("idAlpha"); // id 조건식 모듈 가져오기
+// const pwAlphaNum = require("pwAlphanum"); //password 조건식 모듈 가져오기
+const sub = require("./static/js/indexF"); //sub html 파일 모듈 가져오기
+// const singUpAsset = require("singUpAsset");
+
+// res.writeHead(200, { "content-Type": "text/html" });
+// res.end(html.one + `${singUpAsset.id}` + html.two);
+// 조건식이 참이면 읽을 데이터 subpage
 
 function serverErrorLog() {
   res.writeHead(500);
-  return res.end("서버에 문제가 생겻습니다.");
+  return res.end("서버에 문제가 생겼습니다.");
 }
 
 const server = http.createServer((req, res) => {
-  const parsedUrl = url.parse(req.url, true);
+  // const parsedUrl = url.parse(req.url, true);
   if (req.url === "/" && req.method === "GET") {
     fs.readFile("./static/index.html", (err, data) => {
       if (err) {
@@ -26,38 +35,24 @@ const server = http.createServer((req, res) => {
       res.writeHead(200, { "Content-Type": "text/css" });
       res.end(data);
     });
-  } else if (
-    req.method === "POST" &&
-    parsedUrl.pathname === "/static/secindex.html"
-  ) {
-    fs.readFile("./static/secindex.html", "utf8", (err, data) => {
-      if (err) {
-        serverErrorLog();
-      }
-      let body = "";
-      req.on("data", (chunk) => {
-        body += chunk.toString();
-      });
-      req.on("end", () => {
-        const parsedBody = querystring.parse(body);
-        const { uesrname, password } = parsedBody;
+  } else if (req.method === "POST" && req.url === "/login") {
+    let body = "";
 
-        console.log(`form으로 부터 받은 데이터 확인 ->`, parsedBody);
-        console.log(`form으로 부터 받은 데이터 확인 ->`, uesrname);
-        console.log(`form으로 부터 받은 데이터 확인 ->`, password);
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.end(data);
-      });
+    req.on("data", (chunk) => {
+      body += chunk.toString(); // body = body + chunk.toString -> input에 입력된 데이터를 문자열로 body에 반환
     });
-    // } else if (req.url === "/static/js/index.js" && req.method === "POST") {
-    //   fs.readFile("./static/js/index.js", "utf8", (err, data) => {
-    //     if (err) {
-    //       serverErrorLog();
-    //     }
-    //     res.writeHead(200, { "Content-Type": "application/javascript" });
-    //     res.end(data);
-    //   });
-    // }
+
+    req.on("end", () => {
+      const parseBody = querystring.parse(body); // body 값을 parseBody라는 객체에 문자열로 대입
+      const { username, password, password2, email } = parseBody;
+
+      // Object.assign(signUpAsset, parseBody); // parseBody의 프로퍼티 키와 동일한 signUpAsset의 프로퍼티 키에 값을 대입
+      // console.log(signUpAsset);
+      // id, password, email 조건식
+
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.end(sub(username));
+    });
   }
 });
 const PORT = 8080;
