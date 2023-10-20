@@ -13,4 +13,4 @@ function idAlpha(value) {
   }
 }
 
-module.exports = idAlpha;
+//idpwcheck로 통합
