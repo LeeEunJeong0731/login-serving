@@ -8,7 +8,7 @@
   </head>
   <body>
     <div id="root">
-      <form name="joinForm" action="/static/secindex.html" method="post">
+      <form name="joinForm" action="/login" method="post">
         <div>
           <label>ID <input type="text" name="username" id="userId" /></label>
         </div>
@@ -19,7 +19,7 @@
         </div>
         <div>
           <label
-            >PW <input type="password" name="password" id="repassword"
+            >PW <input type="password" name="password2" id="repassword"
           /></label>
         </div>
         <div>
@@ -29,7 +29,7 @@
           type="submit"
           value="Sing Up"
           id="submit"
-          onclick="submit_check();"
+          onclick="submit_check()"
         />
       </form>
     </div>
@@ -42,19 +42,20 @@
       const password = document.getElementById("password");
       const repassword = document.getElementById("repassword");
       const email = document.getElementById("email");
-      const idAlpha = require("idAlpha");
+      import { idAlpha, pwAlphaNum } from "../static/js/index.js";
+
+      console.dir(userId);
+
+      function errorAlertMessage(message, focus) {
+        alert(message);
+        focus.focus();
+      }
 
       function submit_check() {
-        function errorAlertMessage(message, focus) {
-          alert(message);
-          focus.focus();
-        }
-
         if (userId.value === "") {
-          return errorAlertMessage("id를 입력해주세요.", userId);
-
+          errorAlertMessage("id를 입력해주세요.", userId);
           // userId 의 값이 비워져있을 경우 팝업창을 띄우고 아래 함수들을 모두 false로 번환 해라.
-        } else if (!idAlpha(userId.value) === false) {
+        } else if (!idAlpha(userId.value)) {
           return errorAlertMessage(
             "id는 영어 대문자 소문자를 포함해서 작성해주세요.",
             userId
