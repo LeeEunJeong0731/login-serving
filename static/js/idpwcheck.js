@@ -4,6 +4,7 @@ function idCheck(id) {
 
   for (let i = 0; i < id.langth; i++) {
     code = id.charCodeAt(i);
+
     if (code >= 65 && code <= 90) {
       upper = true; //대문자 true 반환
     } else if (code >= 97 && code <= 122) {

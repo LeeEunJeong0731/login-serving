@@ -28,31 +28,6 @@ const sub = (subpage) => {
           </div>
         </form>
       </div>
-      <script>
-        const title = document.getElementById("title");
-        const text = document.getElementById("text");
-        const btn = document.getElementById("button");
-        btn.addEventListener("mouseover", (caution) => {
-          if (title.value === "") {
-            alert("제목을 입력해주세요");
-            title.focus();
-          }
-  
-          if (text.value === "") {
-            alert("내용을 입력해주세요");
-            text.focus();
-          }
-        });
-  
-        // input이 빈칸 여부에 따른 버튼 활성화 함수
-        function active() {
-          if (!(title.value && text.value)) {
-            btn.disabled = true;
-          } else {
-            btn.disabled = false;
-          }
-        }
-      </script>
     </body>
   </html>
     </body>
