@@ -1,27 +1,16 @@
 function idCheck(id) {
-  if (!idpwCheck(id)) {
-    return false;
-  } else if (true === null) {
-    return false;
-  }
-  // 조건 만족 후 true 반환
-  return true;
-}
+  upper = false; // 대문자
+  rower = false; // 소문자
 
-function idpwCheck(id) {
-  for (let i = 0; i < id.length; i++) {
-    if (
-      id.charCodeAt(i) >= 65 && //// numeric (0-9)
-      id.charCodeAt(i) <= 90 && // upper alpha( A - Z )
-      id.charCodeAt(i) >= 97 &&
-      id.charCodeAt(i) <= 122 // lower alpha ( a - z )
-    ) {
-      count += 1;
-      return true;
-    } else {
-      return false;
+  for (let i = 0; i < id.langth; i++) {
+    code = id.charCodeAt(i);
+    if (code >= 65 && code <= 90) {
+      upper = true; //대문자 true 반환
+    } else if (code >= 97 && code <= 122) {
+      rower = true; //소문자 true 반환
     }
   }
+  return upper && lower; // 대소문자가 모두 포함되면 true, 아니면 false
 }
 
-module.exports = idPwCheck;
+module.exports = idCheck;
