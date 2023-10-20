@@ -3,13 +3,16 @@ const fs = require("fs");
 const url = require("url");
 const querystring = require("querystring"); //쿼리스트링 모듈 가져오기
 
-// const idAlpha = require("idAlpha"); // id 조건식 모듈 가져오기
-// const pwAlphaNum = require("pwAlphanum"); //password 조건식 모듈 가져오기
+const idpwcheck = require("./static/js/idpwcheck"); // id와pw 조건식 모듈 가져오기
 const sub = require("./static/js/indexF"); //sub html 파일 모듈 가져오기
-// const singUpAsset = require("singUpAsset");
+const singUpAsset = require("./static/js/singUpAsset");
 
-// res.writeHead(200, { "content-Type": "text/html" });
-// res.end(html.one + `${singUpAsset.id}` + html.two);
+const passwordcheck = require("./static/js/passwordcheck"); //password가 같은지 확인하는 모듈 가져오기
+
+const emailCheck = require("./static/js/emaliCheck"); //email 확인 모듈가져오기
+
+res.writeHead(200, { "content-Type": "text/html" });
+res.end(html.one + `${singUpAsset.id}` + html.two);
 // 조건식이 참이면 읽을 데이터 subpage
 
 function serverErrorLog() {
@@ -46,11 +49,16 @@ const server = http.createServer((req, res) => {
       const parseBody = querystring.parse(body); // body 값을 parseBody라는 객체에 문자열로 대입
       const { username, password, password2, email } = parseBody;
 
-      // Object.assign(signUpAsset, parseBody); // parseBody의 프로퍼티 키와 동일한 signUpAsset의 프로퍼티 키에 값을 대입
-      // console.log(signUpAsset);
+      Object.assign(signUpAsset, parseBody); // parseBody의 프로퍼티 키와 동일한 signUpAsset의 프로퍼티 키에 값을 대입
+
       // id, password, email 조건식
 
-      res.writeHead(200, { "Content-Type": "text/html" });
+      if (
+        idpwcheck(singUpAsset.id, password) &&
+        passwordcheck(singUpAsset.password, singUpAsset.password2) &&
+        emailCheck(singUpAsset.email)
+      )
+        res.writeHead(200, { "Content-Type": "text/html" });
       res.end(sub(username));
     });
   }
