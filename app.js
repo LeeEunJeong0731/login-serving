@@ -1,6 +1,5 @@
 const http = require("http");
 const fs = require("fs");
-const url = require("url");
 const querystring = require("querystring"); //쿼리스트링 모듈 가져오기
 
 const idpwcheck = require("./static/js/idpwcheck"); // id와pw 조건식 모듈 가져오기
@@ -10,10 +9,6 @@ const singUpAsset = require("./static/js/singUpAsset");
 const passwordcheck = require("./static/js/passwordcheck"); //password가 같은지 확인하는 모듈 가져오기
 
 const emailCheck = require("./static/js/emaliCheck"); //email 확인 모듈가져오기
-
-res.writeHead(200, { "content-Type": "text/html" });
-res.end(html.one + `${singUpAsset.id}` + html.two);
-// 조건식이 참이면 읽을 데이터 subpage
 
 function serverErrorLog() {
   res.writeHead(500);
@@ -42,24 +37,25 @@ const server = http.createServer((req, res) => {
     let body = "";
 
     req.on("data", (chunk) => {
-      body += chunk.toString(); // body = body + chunk.toString -> input에 입력된 데이터를 문자열로 body에 반환
+      body = body + chunk.toString(); // body = body + chunk.toString -> input에 입력된 데이터를 문자열로 body에 반환
     });
 
     req.on("end", () => {
       const parseBody = querystring.parse(body); // body 값을 parseBody라는 객체에 문자열로 대입
-      const { username, password, password2, email } = parseBody;
+      const { username } = parseBody;
 
-      Object.assign(signUpAsset, parseBody); // parseBody의 프로퍼티 키와 동일한 signUpAsset의 프로퍼티 키에 값을 대입
+      // Object.assign(singUpAsset, parseBody); // parseBody의 프로퍼티 키와 동일한 signUpAsset의 프로퍼티 키에 값을 대입
 
       // id, password, email 조건식
 
       if (
-        idpwcheck(singUpAsset.id, password) &&
+        idpwcheck(singUpAsset.id) &&
         passwordcheck(singUpAsset.password, singUpAsset.password2) &&
         emailCheck(singUpAsset.email)
-      )
+      ) {
         res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(sub(username));
+        res.end(sub(username));
+      }
     });
   }
 });

@@ -1,8 +1,8 @@
-function idCheck(id) {
+function idpwcheck(id) {
   upper = false; // 대문자
   rower = false; // 소문자
 
-  for (let i = 0; i < id.langth; i++) {
+  for (let i = 0; i < id.length; i++) {
     code = id.charCodeAt(i);
 
     if (code >= 65 && code <= 90) {
@@ -14,4 +14,4 @@ function idCheck(id) {
   return upper && lower; // 대소문자가 모두 포함되면 true, 아니면 false
 }
 
-module.exports = idCheck;
+module.exports = idpwcheck;
