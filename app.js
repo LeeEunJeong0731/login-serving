@@ -48,7 +48,6 @@ const server = http.createServer((req, res) => {
 
       // id, password, email 조건식
 
-      //! if주석 미처리시 다음 페이지로 넘어 가지 않음
       if (
         // idpwcheck(singUpAsset.id) &&
         passwordcheck(singUpAsset.password, singUpAsset.password2) && // 다음페이지 넘어감
@@ -57,6 +56,7 @@ const server = http.createServer((req, res) => {
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(sub(username));
       }
+      // id 대소문자 포함 비밀번호 두개 같아야함 이메일 @. 사용 해야 다음 페이지 넘어감
     });
   }
 });
