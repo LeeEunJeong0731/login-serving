@@ -37,20 +37,21 @@ const server = http.createServer((req, res) => {
     let body = "";
 
     req.on("data", (chunk) => {
-      body = body + chunk.toString(); // body = body + chunk.toString -> input에 입력된 데이터를 문자열로 body에 반환
+      body += chunk.toString(); // body = body + chunk.toString -> input에 입력된 데이터를 문자열로 body에 반환
     });
 
     req.on("end", () => {
       const parseBody = querystring.parse(body); // body 값을 parseBody라는 객체에 문자열로 대입
       const { username } = parseBody;
 
-      // Object.assign(singUpAsset, parseBody); // parseBody의 프로퍼티 키와 동일한 signUpAsset의 프로퍼티 키에 값을 대입
+      Object.assign(singUpAsset, parseBody); // parseBody의 프로퍼티 키와 동일한 signUpAsset의 프로퍼티 키에 값을 대입
 
       // id, password, email 조건식
 
+      //! if주석 미처리시 다음 페이지로 넘어 가지 않음
       if (
-        idpwcheck(singUpAsset.id) &&
-        passwordcheck(singUpAsset.password, singUpAsset.password2) &&
+        // idpwcheck(singUpAsset.id) &&
+        passwordcheck(singUpAsset.password, singUpAsset.password2) && // 다음페이지 넘어감
         emailCheck(singUpAsset.email)
       ) {
         res.writeHead(200, { "Content-Type": "text/html" });
